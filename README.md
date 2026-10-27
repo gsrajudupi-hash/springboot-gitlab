@@ -19,3 +19,6 @@ Developer B updated this README
 
 # Git Collabaration
 This change was made independently on main.
+
+# Release Notes
+Version 1.0.0 release on Oct 27, 2026
