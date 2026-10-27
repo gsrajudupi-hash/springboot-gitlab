@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -38,5 +39,20 @@ public class ProductController {
 		return productService.findById(id).orElseThrow(() ->
 		new ResponseStatusException(HttpStatus.NOT_FOUND,"Product not found: "+id));
 	}
+
+
+	@GetMapping
+	public List<Product> findAll(
+	        @RequestParam(name = "q", required = false) String q) {
+
+	    System.out.println("Search parameter q = [" + q + "]");
+
+	    if (q == null || q.isBlank()) {
+	        return productService.findAll();
+	    }
+
+	    return productService.searchByName(q);
+	}
+
 
 }
